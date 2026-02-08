@@ -9,7 +9,7 @@ Ce module regroupe les fonctions d'échange entre :
 
 Conventions utilisées dans ce projet
 -----------------------------------
-- La valeur NODATA est fixée à 9999 en entrée et en sortie.
+- La valeur NODATA est fixée à -9999 en entrée et en sortie.
 - En interne, les zones NODATA sont converties en NaN pour faciliter les calculs.
 - L'ordre des triangles est celui du fichier scene_triangle.cir.
   Il doit être respecté à la lecture et à l'écriture des fichiers .val.
@@ -36,7 +36,7 @@ import numpy as np
 from .mapping import mapping_surface
 
 
-NODATA_MH = 9999.0
+NODATA_MH = -9999.0
 
 
 def _valeurs_ascii(lignes_donnees):
@@ -77,7 +77,7 @@ def lire_mh_ascii(chemin):
             Geotransform compatible GDAL :
             (xllcorner, cellsize, 0, y_max, 0, -cellsize)
         nd : float
-            Valeur NODATA de référence, toujours égale à 9999.0.
+            Valeur NODATA de référence, toujours égale à -9999.0.
 
     Hypothèses
     ----------
@@ -87,7 +87,7 @@ def lire_mh_ascii(chemin):
     Remarque
     --------
     Même si le fichier contient un autre code NODATA, il sera converti en NaN.
-    La convention interne du projet reste NODATA_MH = 9999.
+    La convention interne du projet reste NODATA_MH = -9999.
     """
     entete = {}
     lignes_donnees = []
@@ -552,7 +552,7 @@ def sm_vers_mh_raster(mh_txt_ref, cir, val_path, pondere=False):
     tuple[np.ndarray, tuple, float]
         ras_rec : np.ndarray float contenant NaN sur les pixels non couverts
         gt : geotransform du raster
-        nd : NODATA de référence (9999)
+        nd : NODATA de référence (-9999)
     """
     ras_ref, gt, nodata = lire_mh_ascii(mh_txt_ref)
     _, pts, tri = lire_scene_triangle_cir(cir)
@@ -593,7 +593,7 @@ def sm_vers_mh_raster(mh_txt_ref, cir, val_path, pondere=False):
 
 def ecrire_mh_ascii(chemin_sortie, ras, gt, nodata=NODATA_MH):
     """
-    Écrit un raster ESRI ASCII grid (.asc ou .txt) avec NODATA fixé à 9999.
+    Écrit un raster ESRI ASCII grid (.asc ou .txt) avec NODATA fixé à -9999.
 
     Paramètres
     ----------
