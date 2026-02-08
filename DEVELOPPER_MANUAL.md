@@ -193,7 +193,7 @@ Restitution :
 - journal QGIS (obligatoire)
 - messageBar (résumé optionnel)
 
-## 7. Contrats de format et invariants
+## 7. Contraintes de format et invariants
 
 ### 7.1 Raster MH (ESRI ASCII grid)
 
@@ -213,15 +213,15 @@ Point critique : si NODATA change, l’ensemble des métriques et reconstruction
 
 Le .cir est la référence d’ordre. Le .val dépend entièrement de cet ordre.
 
-Contrats :
+Contraintes :
 
-- découpage facettes : lignes f i n
+- découpage facettes : lignes f i n chaque ième facette possède n triangle
 - n triangles attendus ensuite
 - extraction des triangles dans l’ordre exact
 
 ### 7.3 Fichier .val
 
-Contrat :
+Contrainte :
 
 - une valeur par triangle
 - valeurs écrites par facette
@@ -229,7 +229,7 @@ Contrat :
 
 ## 8. Gestion des performances
 
-Le coût dominant est le mapping surface-based (intersection triangle/pixel).
+Le coût dominant est le mapping surface-based (intersection triangle/pixel) environ 25 s pour la pipeline avec un raster représentant 4km2 avec une résolution spatiale moyenne de 30cms.
 
 Points de vigilance :
 
@@ -264,7 +264,7 @@ Chaque action UI doit être encapsulée dans un try/except :
 - journaliser l’erreur
 - afficher un QMessageBox.critical pour informer l’utilisateur
 
-## 10. Interface UI : conventions et pièges
+## 10. Interface UI : conventions
 
 ### 10.1 Noms d’objets Qt
 
