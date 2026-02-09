@@ -75,12 +75,15 @@ Bibliothèques supplémentaires pour la visualisation 3D :
 (Besoin de python 3.10) 
 
 Pyvista : pip install Pyvista 
+
 Meshio : pip install Meshio 
 
 commandes pour installer les bibliothèques sous linux : 
 
 /usr/bin/python3 -m pip install --user meshio
+
 /usr/bin/python3 -m pip install --user pyvista --no-deps
+
 sudo apt install python3-h5py
 
 
